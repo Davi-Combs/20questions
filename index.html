@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Questions with a Glitchy Rabbit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="rabbit-container" class="glitch-container">
+            <img src="rabbit.png" alt="A worn out computer rabbit" id="rabbit-image">
+            <div class="glitch-overlay"></div>
+        </div>
+        <div id="dialogue-box">
+            <p id="dialogue-text"></p>
+        </div>
+        <div id="controls-box">
+            <!-- Buttons will be dynamically added here -->
+        </div>
+        <div id="learning-box" class="hidden">
+            <p>You stumped me! Help me learn.</p>
+            <input type="text" id="user-object-input" placeholder="What were you thinking of?">
+            <input type="text" id="new-question-input" placeholder="A question to tell our objects apart">
+            <p>What is the answer for YOUR object?</p>
+            <div id="new-question-answer-buttons">
+                <button id="new-q-yes-btn">Yes</button>
+                <button id="new-q-no-btn">No</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>

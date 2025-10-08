@@ -1,0 +1,103 @@
+body {
+    background-color: #1a1a1a;
+    color: #00ff41;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+#game-container {
+    text-align: center;
+    border: 2px solid #00ff41;
+    padding: 20px;
+    box-shadow: 0 0 15px #00ff41;
+    max-width: 600px;
+}
+
+#rabbit-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    cursor: pointer;
+}
+
+#rabbit-image {
+    width: 100%;
+    height: 100%;
+}
+
+/* Glitch Effect */
+.glitch-container {
+    animation: glitch-anim 3s infinite steps(2, end);
+}
+
+@keyframes glitch-anim {
+    0%, 100% { transform: translate(0, 0); }
+    5% { transform: translate(5px, -5px); }
+    10% { transform: translate(-5px, 5px); }
+    15% { transform: translate(5px, 5px); }
+    20% { transform: translate(-5px, -5px); }
+    25% { transform: translate(0, 0); }
+    /* ... long pause ... */
+    90% { transform: translate(0, 0); }
+    92% { text-shadow: -2px -2px 0 #ff00c1, 2px 2px 0 #00ff41; }
+    94% { transform: translate(3px, -3px); }
+    96% { transform: translate(-3px, 3px); text-shadow: none; }
+    98% { transform: translate(0, 0); }
+}
+
+#dialogue-box {
+    min-height: 50px;
+    padding: 10px;
+    border: 1px dashed #00ff41;
+    margin-bottom: 20px;
+}
+
+#dialogue-text {
+    margin: 0;
+    font-size: 1.2em;
+    text-shadow: 0 0 5px #00ff41;
+}
+
+#controls-box button, #new-question-answer-buttons button {
+    background-color: transparent;
+    border: 2px solid #00ff41;
+    color: #00ff41;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#controls-box button:hover, #new-question-answer-buttons button:hover {
+    background-color: #00ff41;
+    color: #1a1a1a;
+}
+
+#learning-box {
+    margin-top: 20px;
+    border-top: 1px solid #00ff41;
+    padding-top: 15px;
+}
+
+#learning-box input {
+    background-color: #222;
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    padding: 8px;
+    width: 80%;
+    margin-bottom: 10px;
+    font-family: inherit;
+}
+
+.hidden {
+    display: none;
+}
+
