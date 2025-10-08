@@ -64,7 +64,7 @@ body {
     text-shadow: 0 0 5px #00ff41;
 }
 
-#controls-box button, #new-question-answer-buttons button {
+#controls-box button, #new-question-answer-buttons button, #game-over-box button {
     background-color: transparent;
     border: 2px solid #00ff41;
     color: #00ff41;
@@ -76,9 +76,13 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-#controls-box button:hover, #new-question-answer-buttons button:hover {
+#controls-box button:hover, #new-question-answer-buttons button:hover, #game-over-box button:hover {
     background-color: #00ff41;
     color: #1a1a1a;
+}
+
+#game-over-box {
+    margin-top: 10px;
 }
 
 #learning-box {
@@ -100,4 +104,3 @@ body {
 .hidden {
     display: none;
 }
-

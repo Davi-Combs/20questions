@@ -28,6 +28,7 @@ function playSound(name) {
 // --- DOM Elements ---
 const dialogueText = document.getElementById('dialogue-text');
 const controlsBox = document.getElementById('controls-box');
+const gameOverBox = document.getElementById('game-over-box'); // For extra buttons
 const rabbitContainer = document.getElementById('rabbit-container');
 const learningBox = document.getElementById('learning-box');
 const userObjectInput = document.getElementById('user-object-input');
@@ -42,7 +43,7 @@ let parentNode = null;
 let lastAnswer = null;
 
 // Initial decision tree. Can be expanded by learning.
-let decisionTree = {
+const initialDecisionTree = {
     question: "Is it an animal?",
     yes: {
         question: "Does it meow?",
@@ -55,6 +56,8 @@ let decisionTree = {
         no: { guess: "a rock" }
     }
 };
+
+let decisionTree = JSON.parse(JSON.stringify(initialDecisionTree));
 
 function typeWriter(text, onComplete) {
     let i = 0;
@@ -73,8 +76,8 @@ function typeWriter(text, onComplete) {
 }
 
 
-function showButtons(buttons) {
-    controlsBox.innerHTML = '';
+function showButtons(buttons, container = controlsBox) {
+    container.innerHTML = '';
     for (const [text, handler] of Object.entries(buttons)) {
         const button = document.createElement('button');
         button.textContent = text;
@@ -82,19 +85,26 @@ function showButtons(buttons) {
             playSound('click');
             handler();
         };
-        controlsBox.appendChild(button);
+        container.appendChild(button);
     }
+}
+
+function resetGameToInitialState() {
+    decisionTree = JSON.parse(JSON.stringify(initialDecisionTree));
+    beginGame();
 }
 
 function startGame() {
     gameState = 'intro';
     learningBox.classList.add('hidden');
+    gameOverBox.classList.add('hidden');
     typeWriter("Do you... wanna play a game...?", () => {
         showButtons({ 'Yes': beginGame, 'No': () => typeWriter("...maybe later...") });
     });
 }
 
 function beginGame() {
+    gameOverBox.classList.add('hidden');
     currentNode = decisionTree;
     parentNode = null;
     lastAnswer = null;
@@ -131,12 +141,15 @@ function handleCorrectGuess() {
     gameState = 'end';
     typeWriter("Heh heh heh... I always win. Play again?", () => {
         showButtons({ 'Play Again': beginGame });
+        gameOverBox.classList.remove('hidden');
+        showButtons({ 'Start Over (Reset Memory)': resetGameToInitialState }, gameOverBox);
     });
 }
 
 function startLearning() {
     gameState = 'learning';
     controlsBox.innerHTML = '';
+    gameOverBox.classList.add('hidden');
     learningBox.classList.remove('hidden');
     typeWriter("Hmph. You got me. Help me learn.");
 }
@@ -168,6 +181,8 @@ function processLearning(newQuestionAnswer) {
 
     typeWriter("Hmph. Fine. I've 'learned'. Let's play again.", () => {
         showButtons({ 'Play Again': beginGame });
+        gameOverBox.classList.remove('hidden');
+        showButtons({ 'Start Over (Reset Memory)': resetGameToInitialState }, gameOverBox);
     });
 }
 
@@ -198,4 +213,3 @@ async function main() {
 }
 
 main();
-
