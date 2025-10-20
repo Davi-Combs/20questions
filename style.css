@@ -20,8 +20,8 @@ body {
 
 #rabbit-container {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     margin: 0 auto 20px;
     cursor: pointer;
 }
